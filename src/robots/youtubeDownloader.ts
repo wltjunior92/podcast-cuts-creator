@@ -11,7 +11,7 @@ export async function youtubeDownloader() {
   const content = state.load();
 
   await fetchVideoData(content);
-  await downloadSelectedVideo(content.generatedDownloadUrl);
+  // await downloadSelectedVideo(content.generatedDownloadUrl);
 
   state.save(content)
 
@@ -29,6 +29,7 @@ export async function youtubeDownloader() {
     content.originTitle = videoData.title;
     content.originDescription = videoData.description;
     content.originVideoDuration = videoData.duration;
+    content.videoChannel = videoData.channel;
     await downloadOriginThumbnail(content, videoData.thumbnail);
     selectBestQualityVideo(content);
 
@@ -55,7 +56,7 @@ export async function youtubeDownloader() {
 
     async function downloadOriginThumbnail(content: Content, thumbnailUrl: string) {
       try {
-        const downloader = new DownloaderHelper(thumbnailUrl, rootPath, {
+        const downloader = new DownloaderHelper(thumbnailUrl, `${rootPath}/sourceContent/`, {
           fileName: 'originThumbnail.jpg',
         });
 
@@ -71,8 +72,8 @@ export async function youtubeDownloader() {
   }
 
   async function downloadSelectedVideo(videoUrl: string) {
-    const downloader = new DownloaderHelper(videoUrl, rootPath, {
-      fileName: 'downloadedVideo.mp4',
+    const downloader = new DownloaderHelper(videoUrl, `${rootPath}/sourceContent/`, {
+      fileName: 'sourceVideo.mp4',
     });
 
     downloader.on('start', () => console.log(`Starting download: ${videoUrl}`));
