@@ -1,5 +1,4 @@
 import fs from 'fs';
-import content from './content.json';
 
 const contentFilePath = './src/content.json';
 const scriptFilePath = './src/contentScript.js';
@@ -20,6 +19,7 @@ export async function saveScriptData(content: Content) {
 }
 
 export async function saveAfterEffectsScript() {
+  const content = load();
   const loadedScript = fs.readFileSync(afterEffectsTemplateScriptFilePath, 'utf-8');
   const importantData = {
     videoDuration: content.originVideoDuration,

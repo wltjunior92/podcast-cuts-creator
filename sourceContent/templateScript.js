@@ -19,7 +19,7 @@ var usefulContentDurationData = [
 
 var selectedUsefulDurationData = {};
 for (var selectedIndex = 0; selectedIndex < usefulContentDurationData.length; selectedIndex++) {
-  if (usefulContentDurationData[selectedIndex].name === source) {
+  if (usefulContentDurationData[selectedIndex].name === contentData.sourceChannel) {
     selectedUsefulDurationData = usefulContentDurationData[selectedIndex];
     break;
   }
@@ -34,8 +34,8 @@ var endingComp = app.project.item(10);
 var sourceVideo = contentComp.layer(2);
 var logo = contentComp.layer(1);
 
-var usefulDuration = totalDuration - selectedUsefulDurationData.introDuration - selectedUsefulDurationData.endingDuration;
-if (logoSide === 'right') {
+var usefulDuration = contentData.videoDuration - selectedUsefulDurationData.introDuration - selectedUsefulDurationData.endingDuration;
+if (contentData.logoSide === 'right') {
   logo.property('position').setValue([1724, 132, 0])
 } else {
   logo.property('position').setValue([188, 132, 0])
