@@ -1,4 +1,4 @@
-var contentData = eval('({"videoDuration":437,"logoSide":"right"})');
+var contentData = eval('($toSwap$)');
 alert(contentData.videoDuration);
 
 // alert(app.project.item(8).workAreaDuration)

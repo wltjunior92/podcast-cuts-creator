@@ -11,7 +11,7 @@ export async function youtubeDownloader() {
   const content = state.load();
 
   await fetchVideoData(content);
-  // await downloadSelectedVideo(content.generatedDownloadUrl);
+  await downloadSelectedVideo(content.generatedDownloadUrl);
 
   state.save(content)
 
