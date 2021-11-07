@@ -1,10 +1,10 @@
 import fs from 'fs';
-import contentJson from './content.json';
+import content from './content.json';
 
 const contentFilePath = './src/content.json';
 const scriptFilePath = './src/contentScript.js';
-const afterEffectsNewScriptFilePath = 'C:/DevProjects/podcast-cuts-creator/sourceContent/script.js';
-const afterEffectsTemplateScriptFilePath = 'C:/DevProjects/podcast-cuts-creator/sourceContent/templateScript.js';
+const afterEffectsNewScriptFilePath = './sourceContent/script.js';
+const afterEffectsTemplateScriptFilePath = './sourceContent/templateScript.js';
 
 import { Content } from './types/content';
 
@@ -22,8 +22,9 @@ export async function saveScriptData(content: Content) {
 export async function saveAfterEffectsScript() {
   const loadedScript = fs.readFileSync(afterEffectsTemplateScriptFilePath, 'utf-8');
   const importantData = {
-    videoDuration: contentJson.originVideoDuration,
-    logoSide: contentJson.logoSide,
+    videoDuration: content.originVideoDuration,
+    logoSide: content.logoSide,
+    sourceChannel: content.sourceChannel,
   }
 
   const newAfterScript = loadedScript.replace('$toSwap$', JSON.stringify(importantData));
