@@ -42,6 +42,8 @@ if (contentData.logoSide === 'right') {
 }
 
 contentComp.duration = usefulDuration;
+sourceVideo.outPoint = usefulDuration;
+logo.outPoint = usefulDuration;
 sourceVideo.startTime = -selectedUsefulDurationData.introDuration;
 
 // Main composition config
@@ -55,6 +57,8 @@ mainComp.duration = mainCompDuration;
 var introLayer = mainComp.layer(1);
 var contentLayer = mainComp.layer(2);
 var endingLayer = mainComp.layer(3);
+
+contentLayer.outPoint = introCompDuration + contentCompDuration;
 
 introLayer.startTime = 0;
 contentLayer.startTime = introCompDuration;
