@@ -6,8 +6,10 @@ const scriptDir = path.resolve(__dirname, '../../sourceContent/script.js')
 
 export async function videoEditor() {
 
-  await openAfterEffects();
-  await executeScript();
+  // await openAfterEffects();
+  // await executeScript();
+  const response = await cmd.runSync(`tasklist /v /fi "STATUS eq running" /fi "WINDOWTITLE eq Adobe After Effects 2022 - ${templateDir} *"`)
+  console.dir(response.data, { depth: null })
 
   async function openAfterEffects() {
     return new Promise<void>((resolve, reject) => {

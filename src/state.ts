@@ -19,17 +19,20 @@ export async function saveScriptData(content: Content) {
 }
 
 export async function saveAfterEffectsScript() {
-  const content = load();
-  const loadedScript = fs.readFileSync(afterEffectsTemplateScriptFilePath, 'utf-8');
-  const importantData = {
-    videoDuration: content.originVideoDuration,
-    logoSide: content.logoSide,
-    sourceChannel: content.sourceChannel,
-  }
+  return new Promise<void>((resolve, reject) => {
+    const content = load();
+    const loadedScript = fs.readFileSync(afterEffectsTemplateScriptFilePath, 'utf-8');
+    const importantData = {
+      videoDuration: content.originVideoDuration,
+      logoSide: content.logoSide,
+      sourceChannel: content.sourceChannel,
+    }
 
-  const newAfterScript = loadedScript.replace('$toSwap$', JSON.stringify(importantData));
+    const newAfterScript = loadedScript.replace('$toSwap$', JSON.stringify(importantData));
 
-  return fs.writeFileSync(afterEffectsNewScriptFilePath, newAfterScript);
+    fs.writeFileSync(afterEffectsNewScriptFilePath, newAfterScript);
+    resolve();
+  })
 }
 
 export function load(): Content {
