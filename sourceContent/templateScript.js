@@ -3,7 +3,7 @@ var usefulContentDurationData = [
   {
     name: 'Cortes do flow',
     introDuration: 0,
-    endingDuration: 30,
+    endingDuration: 28,
   },
   {
     name: 'Cortes do venus',
@@ -87,6 +87,5 @@ contentLayer.property('audioLevels').setValueAtTime((introCompDuration + 2.5), [
 contentLayer.property('audioLevels').setValueAtTime((introCompDuration + contentCompDuration - 2), [0, 0]);
 contentLayer.property('audioLevels').setValueAtTime((introCompDuration + contentCompDuration), [-30, -30]);
 
-// alert(contentLayer.property('audioLevels').propertyValueType);
-
 app.project.save();
+app.quit();

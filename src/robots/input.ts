@@ -6,9 +6,13 @@ import { Content } from "../types/content";
 export function inputRobot() {
   const content: Content = {};
 
+  let confirmation;
   content.youtubeVideoUrl = askAndReturnyoutubeVideoUrl();
-  content.sourceChannel = askAndReturnSourceChannel();
-  content.logoSide = askAndReturnLogoSide();
+  while (!confirmation) {
+    content.sourceChannel = askAndReturnSourceChannel();
+    content.logoSide = askAndReturnLogoSide();
+    confirmation = confirmInputData();
+  }
   state.save(content);
 
   function askAndReturnyoutubeVideoUrl() {
@@ -29,5 +33,10 @@ export function inputRobot() {
     const selectedLogoSide = logoSides[logoSideIndex];
 
     return selectedLogoSide;
+  }
+
+  function confirmInputData() {
+    const confirmation = readline.keyInYN('Confirm selections?');
+    return confirmation;
   }
 }
