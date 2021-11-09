@@ -31,7 +31,11 @@ export async function videoEditor() {
     return new Promise<void>((resolve, reject) => {
       console.log('Executing script...');
       cmd.run(`afterfx -r ${scriptDir}`);
-      resolve();
+      setTimeout(() => {
+        resolve();
+      }, 3000)
     })
   }
+
+
 }

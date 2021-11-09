@@ -1,5 +1,6 @@
 import { spawn } from 'child_process';
 import path from 'path';
+import cmd from 'node-cmd';
 
 import * as state from '../state';
 
@@ -13,6 +14,7 @@ export async function videoRenderer() {
   const content = state.load();
 
   await renderVideo(content);
+  await closeAfterEffects();
 
   async function renderVideo(content: Content) {
     return new Promise<void>((resolve, reject) => {
@@ -35,6 +37,14 @@ export async function videoRenderer() {
         console.log('Renderer closed!');
         resolve();
       })
+    })
+  }
+
+  async function closeAfterEffects() {
+    return new Promise<void>((resolve, reject) => {
+      cmd.run(`wmic process where "name='AfterFX.com'" delete`);
+      console.log('Closing AfterEffects instance.');
+      resolve();
     })
   }
 }

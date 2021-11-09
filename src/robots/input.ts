@@ -7,6 +7,7 @@ export function inputRobot() {
   const content: Content = {};
 
   let confirmation;
+
   content.youtubeVideoUrl = askAndReturnyoutubeVideoUrl();
   while (!confirmation) {
     content.sourceChannel = askAndReturnSourceChannel();

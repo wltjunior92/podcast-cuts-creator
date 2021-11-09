@@ -13,7 +13,7 @@ var usefulContentDurationData = [
   {
     name: 'Cortes do inteligencia',
     introDuration: 5,
-    endingDuration: 18,
+    endingDuration: 17,
   },
 ];
 
