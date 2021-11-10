@@ -3,12 +3,12 @@ var usefulContentDurationData = [
   {
     name: 'Cortes do flow',
     introDuration: 0,
-    endingDuration: 28,
+    endingDuration: 30,
   },
   {
     name: 'Cortes do venus',
     introDuration: 0,
-    endingDuration: 28,
+    endingDuration: 30,
   },
   {
     name: 'Cortes do inteligencia',
@@ -36,9 +36,9 @@ var logo = contentComp.layer(1);
 
 var usefulDuration = contentData.videoDuration - selectedUsefulDurationData.introDuration - selectedUsefulDurationData.endingDuration;
 if (contentData.logoSide === 'right') {
-  logo.property('position').setValue([1724, 132, 0])
+  logo.property('position').setValue([1791, 88, 0])
 } else {
-  logo.property('position').setValue([188, 132, 0])
+  logo.property('position').setValue([131, 88, 0])
 }
 
 contentComp.duration = usefulDuration;

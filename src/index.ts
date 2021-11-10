@@ -5,8 +5,8 @@ import { youtubeDownloader } from './robots/youtubeDownloader';
 import * as state from './state';
 
 async function start() {
-  inputRobot();
-  await youtubeDownloader();
+  // inputRobot();
+  // await youtubeDownloader();
   await state.saveAfterEffectsScript();
   await videoEditor();
   await videoRenderer();

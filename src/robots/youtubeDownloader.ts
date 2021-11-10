@@ -57,6 +57,7 @@ export async function youtubeDownloader() {
       try {
         const downloader = new DownloaderHelper(thumbnailUrl, `${rootPath}/sourceContent/`, {
           fileName: 'originThumbnail.jpg',
+          override: true,
         });
 
         downloader.on('start', () => console.log(`Starting download origin thumbnail: ${thumbnailUrl}`));
@@ -73,6 +74,7 @@ export async function youtubeDownloader() {
   async function downloadSelectedVideo(videoUrl: string) {
     const downloader = new DownloaderHelper(videoUrl, `${rootPath}/sourceContent/`, {
       fileName: 'sourceVideo.mp4',
+      override: true,
     });
 
     downloader.on('start', () => console.log(`Starting download: ${videoUrl}`));
