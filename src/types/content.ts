@@ -2,6 +2,7 @@ export type Content = {
   youtubeVideoUrl?: string;
   originTitle?: string;
   originDescription?: string;
+  generatedDescription?: string;
   originVideoDuration?: number;
   logoSide?: string;
   generatedDownloadUrl?: string;

@@ -29,6 +29,7 @@ export async function youtubeDownloader() {
     content.originTitle = videoData.title;
     content.originDescription = videoData.description;
     content.originVideoDuration = videoData.duration;
+    content.tags = videoData.tags;
     await downloadOriginThumbnail(content, videoData.thumbnail);
     selectBestQualityVideo(content);
 
