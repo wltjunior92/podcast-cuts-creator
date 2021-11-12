@@ -1,6 +1,7 @@
 import path from 'path';
+import cmd from 'node-cmd';
+import { spawn } from 'child_process';
 import thumb from 'node-video-thumb';
-const gm = require('gm').subClass({ imageMagick: true });
 
 import * as state from '../state';
 
@@ -16,7 +17,8 @@ export async function thumbnailCreator() {
   const thumbnailQuantity = 1;
 
   // await extractThumb();
-  await editAllThumbnail(content);
+  // await editAllThumbnail(content);
+  await testOpenPhotoshopAndEnterArchive();
 
   async function extractThumb() {
     return new Promise<void>(async (resolve, reject) => {
@@ -51,42 +53,43 @@ export async function thumbnailCreator() {
 
   async function editThumbnail(imageName: string, channelTitle: string, imageIndex: number) {
     return new Promise<void>((resolve, reject) => {
+      const thumbnailName = `ShotCutsThumb-${channelTitle}-${imageIndex}.png`
       const inputFile = `${inputFilePath}/${imageName}`
-      const outputFile = `${outputFilePath}/ShotCutsThumb${channelTitle}-${imageIndex}.jpg`;
-      const width = 1920;
+      const outputFile = `${outputFilePath}/${thumbnailName}`;
       const height = 1080;
 
-      gm()
-        .in(inputFile)
-        .out('(')
-        .out('-clone')
-        .out('0')
-        .out('-background', 'white')
-        .out('-blur', '50x200')
-        .out(')')
-        .out('(')
-        .out('-clone')
-        .out('0')
-        .out('-background', 'white')
-        .out('-roll', '-500-0')
-        .out('-crop', `800x${height}`)
-        .out('-geometry', '+100-0')
-        .out('-border', '20')
-        .out(')')
-        .out('-delete', '0')
-        .out('-gravity', 'center')
-        .out('-compose', 'over')
-        .out('-composite')
-        // .out('-extent', `${width}x${height}`)
-        .write(outputFile, (error: Error) => {
-          if (error) {
-            return reject(error)
-          }
+      const args = [
+        inputFile,
+        '(', '-clone', '0', '-background', 'white', '-blur', '50x200', ')',
+        '(', '-clone', '0', '-background', 'white', '-roll', '-400-0', '-crop', `1000x${height}`, '-geometry', '+300-0', ')',
+        '-delete', '0',
+        '-delete', '2',
+        '-gravity', 'center',
+        '-compose', 'over',
+        '-composite',
+        outputFile
+      ]
 
-          console.log(`> [video-robot] Image converted: ${outputFile}`)
-          resolve()
-        })
+      const composite = spawn('magick', args);
+      composite.on('close', () => {
+        console.log(`Create image - ${thumbnailName}`);
+        resolve();
+      })
+    })
+  }
 
+  async function testOpenPhotoshopAndEnterArchive() {
+    return new Promise<void>((resolve, reject) => {
+      // console.log('Oppening photoshop');
+      // cmd.run('start "" "C:\\projetos\\podcast-cuts-creator\\sourceContent\\templates\\photoshop\\logo.psd"');
+
+      // let afterTaskDetails: string = '';
+      // while (!afterTaskDetails.includes('Adobe Photoshop 2022')) {
+      //   const { data } = cmd.runSync(`tasklist /v /fi "IMAGENAME eq Photoshop.exe"`);
+      //   afterTaskDetails = data;
+      // }
+
+      cmd.run('start "" "C:\\projetos\\podcast-cuts-creator\\src\\scripts\\teste.vbs"');
     })
   }
 }

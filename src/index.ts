@@ -12,7 +12,7 @@ async function start() {
   // await state.saveAfterEffectsScript();
   // await videoEditor();
   // await videoRenderer();
-  await videoDescriptionRobot();
+  // await videoDescriptionRobot();
   await thumbnailCreator();
 };
 
