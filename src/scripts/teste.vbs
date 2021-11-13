@@ -1,15 +1,17 @@
 Set WshShell = WScript.CreateObject("WScript.Shell")
 
-WshShell.Run "C:\projetos\podcast-cuts-creator\sourceContent\templates\photoshop\thumbnail-template.psd", 3
+' WshShell.Run "C:\projetos\podcast-cuts-creator\sourceContent\templates\photoshop\thumbnail-template.psd", 3
+WshShell.Run "C:\DevProjects\podcast-cuts-creator\sourceContent\templates\photoshop\thumbnail-template.psd", 3
 
 WScript.Sleep 3000
 
 WshShell.AppActivate "Adobe Photoshop 2022"
 
-WScript.Sleep 5000
+' WScript.Sleep 5000
+WScript.Sleep 20000
 
-WshShell.SendKeys "{ENTER}"
-WScript.Sleep 500
+' WScript.Sleep 500
+WScript.Sleep 5000
 WshShell.SendKeys "%"
 WScript.Sleep 500
 WshShell.SendKeys "a"
@@ -33,14 +35,25 @@ WScript.Sleep 1000
 WshShell.SendKeys "+{C}"
 WshShell.SendKeys "+{;}"
 WshShell.SendKeys "{\}"
-WshShell.SendKeys "{p}"
+WshShell.SendKeys "+{d}"
+WshShell.SendKeys "{e}"
+WshShell.SendKeys "{v}"
+WshShell.SendKeys "+{p}"
 WshShell.SendKeys "{r}"
 WshShell.SendKeys "{o}"
 WshShell.SendKeys "{j}"
 WshShell.SendKeys "{e}"
+WshShell.SendKeys "{c}"
 WshShell.SendKeys "{t}"
-WshShell.SendKeys "{o}"
 WshShell.SendKeys "{s}"
+' WshShell.SendKeys "{p}"
+' WshShell.SendKeys "{r}"
+' WshShell.SendKeys "{o}"
+' WshShell.SendKeys "{j}"
+' WshShell.SendKeys "{e}"
+' WshShell.SendKeys "{t}"
+' WshShell.SendKeys "{o}"
+' WshShell.SendKeys "{s}"
 WshShell.SendKeys "{\}"
 WshShell.SendKeys "{p}"
 WshShell.SendKeys "{o}"
@@ -111,6 +124,11 @@ WshShell.SendKeys "{r}"
 WshShell.SendKeys "{i}"
 WshShell.SendKeys "{p}"
 WshShell.SendKeys "{t}"
+WshShell.SendKeys "+{t}"
+WshShell.SendKeys "{h}"
+WshShell.SendKeys "{u}"
+WshShell.SendKeys "{m}"
+WshShell.SendKeys "{b}"
 WshShell.SendKeys "{.}"
 WshShell.SendKeys "{j}"
 WshShell.SendKeys "{s}"

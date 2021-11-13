@@ -11,6 +11,7 @@ const sourcePath = path.resolve(__dirname, '../../sourceContent/sourceVideo.mp4'
 const targetPath = path.resolve(__dirname, '../../sourceContent/thumbImageSource');
 const inputFilePath = path.resolve(__dirname, '../../sourceContent');
 const outputFilePath = path.resolve(__dirname, '../../sourceContent/renderedContent');
+const photoshopScriptsPath = path.resolve(__dirname, '../../src/scripts');
 
 export async function thumbnailCreator() {
   const content = state.load();
@@ -89,7 +90,9 @@ export async function thumbnailCreator() {
       //   afterTaskDetails = data;
       // }
 
-      cmd.run('cscript "C:\\projetos\\podcast-cuts-creator\\src\\scripts\\teste.vbs"');
+      const { data } = cmd.runSync(`cscript "${photoshopScriptsPath}\\teste.vbs"`);
+      console.log(data);
+
     })
   }
 }
