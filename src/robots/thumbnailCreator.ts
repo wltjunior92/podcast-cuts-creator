@@ -7,15 +7,15 @@ import * as state from '../state';
 
 import { Content } from '../types/content';
 
-const sourcePath = path.resolve(__dirname, '../../sourceContent/sourceVideo.mp4');
-const targetPath = path.resolve(__dirname, '../../sourceContent/thumbImageSource');
+const sourcePath = path.resolve(__dirname, '../../sourceContent/renderedContent/processingVideo/assets/sourceVideo.mp4');
+const targetPath = path.resolve(__dirname, '../../sourceContent/renderedContent/processingVideo/assets/thumbImageSource');
 const inputFilePath = path.resolve(__dirname, '../../sourceContent');
 const outputFilePath = path.resolve(__dirname, '../../sourceContent/renderedContent');
 const photoshopScriptsPath = path.resolve(__dirname, '../../src/scripts');
 
 export async function thumbnailCreator() {
   const content = state.load();
-  const thumbnailQuantity = 1;
+  const thumbnailQuantity = 2;
 
   // await extractThumb();
   // await editAllThumbnail(content);
@@ -41,14 +41,13 @@ export async function thumbnailCreator() {
       console.log('Images extracted!');
       setTimeout(() => {
         resolve();
-      }, 2000)
+      }, 500)
     })
   }
 
   async function editAllThumbnail(content: Content) {
     for (let imageIndex = 1; imageIndex <= thumbnailQuantity; imageIndex++) {
-      const originVideoTitle = content.originTitle.replace(/\ /g, '-').replace(/\|/g, '_').replace(/\./, '');
-      await editThumbnail(`thumbImageSource-${imageIndex}.jpg`, originVideoTitle, imageIndex);
+      await editThumbnail(`thumbImageSource-${imageIndex}.jpg`, content.editedTitle, imageIndex);
     }
   }
 

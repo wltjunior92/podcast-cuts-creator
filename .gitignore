@@ -108,9 +108,9 @@ dist
 content.json
 sourceVideo.mp4
 originThumbnail.jpg
-*.mov
+render
 Salvamento automático do Adobe After Effects
-contentScript.js
-script.js
+script.jsx
 Logs de template.aep
 descriptionText.txt
+assets

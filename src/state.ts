@@ -1,21 +1,14 @@
 import fs from 'fs';
 
 const contentFilePath = './src/content.json';
-const scriptFilePath = './src/contentScript.js';
-const afterEffectsNewScriptFilePath = './sourceContent/script.js';
-const afterEffectsTemplateScriptFilePath = './sourceContent/templateScript.js';
+const afterEffectsNewScriptFilePath = './sourceContent/templates/AfterEffects/scripts/script.jsx';
+const afterEffectsTemplateScriptFilePath = './sourceContent/templateScript.jsx';
 
 import { Content } from './types/content';
 
 export function save(content: Content) {
   const contentString = JSON.stringify(content);
   return fs.writeFileSync(contentFilePath, contentString);
-}
-
-export async function saveScriptData(content: Content) {
-  const contentString = JSON.stringify(content);
-  const scriptString = `var content = ${contentString}`
-  return fs.writeFileSync(scriptFilePath, scriptString);
 }
 
 export async function saveAfterEffectsScript() {

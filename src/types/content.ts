@@ -1,6 +1,6 @@
 export type Content = {
   youtubeVideoUrl?: string;
-  originTitle?: string;
+  originTitleSanityzed?: string;
   originDescription?: string;
   generatedDescription?: string;
   originVideoDuration?: number;

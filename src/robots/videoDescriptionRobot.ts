@@ -13,23 +13,27 @@ export async function videoDescriptionRobot() {
     const originDescriptionLines = content.originDescription.split('\n');
 
     let urlOrigin: string = ''
-    const test = originDescriptionLines.filter(line => {
+    const urlList = originDescriptionLines.filter(line => {
       if (line.match(/(https\:\/\/www\.youtube\.com\/watch+\?[a-zA-Z0-9._-])/gi) ||
         line.match(/(https\:\/\/youtu\.be\/[a-zA-Z0-9._-])/gi)) {
         return line;
       }
     })
 
-    urlOrigin = test.length > 0 && test[0];
+    urlOrigin = urlList.length > 0 && urlList[0];
 
     const generatedDescription = `Assista esse episódio completo!\n${urlOrigin}`;
     content.generatedDescription = generatedDescription;
   }
 
   async function saveTxtContent(content: Content) {
-    const stringTags = content.tags.join('# ');
+    let stringTags = '';
+    content.tags.map(tag => {
+      const editTag = tag.replace(/ /g, '_')
+      stringTags += `#${editTag} `
+    });
     const descriptionTxtString = `${content.generatedDescription}\n\n---------------\n\n${stringTags}`;
 
-    fs.writeFileSync('./src/descriptionText.txt', descriptionTxtString, 'utf-8');
+    fs.writeFileSync('./sourceContent/renderedContent/processingVideo/descriptionText.txt', descriptionTxtString, 'utf-8');
   }
 }

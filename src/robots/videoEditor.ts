@@ -2,7 +2,7 @@ import path from 'path';
 import cmd from 'node-cmd';
 
 const templateDir = path.resolve(__dirname, '../../sourceContent/templates/AfterEffects/1/template.aep')
-const scriptDir = path.resolve(__dirname, '../../sourceContent/script.js')
+const scriptDir = path.resolve(__dirname, '../../sourceContent/templates/AfterEffects/scripts/script.jsx')
 const rootDir = path.resolve(__dirname, '../../')
 
 export async function videoEditor() {

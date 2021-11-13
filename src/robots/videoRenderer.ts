@@ -1,10 +1,12 @@
 import { spawn } from 'child_process';
 import path from 'path';
 import cmd from 'node-cmd';
+import fs from 'fs';
 
 import * as state from '../state';
 
 import { Content } from '../types/content';
+import { createFolder } from '../utils/createFolder';
 
 const aerenderFilePath = 'C:/Program Files/Adobe/Adobe After Effects 2022/Support Files/aerender.exe';
 const rootDir = path.resolve(__dirname, '../../');
@@ -17,9 +19,11 @@ export async function videoRenderer() {
   await closeAfterEffects();
 
   async function renderVideo(content: Content) {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>(async (resolve, reject) => {
+      await createFolder(`${rootDir}/sourceContent/renderedContent/processingVideo/render`)
+
       const templateFilePath = `${rootDir}/sourceContent/templates/AfterEffects/1/template.aep`;
-      const destinationFilePath = `${rootDir}/sourceContent/renderedContent/ShortCuts${content.originTitle}.mov`;
+      const destinationFilePath = `${rootDir}/sourceContent/renderedContent/processingVideo/render/ShortCuts-${content.originTitleSanityzed}.mov`;
 
       console.log('Rendering vídeo:');
 

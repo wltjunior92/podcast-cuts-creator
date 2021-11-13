@@ -1,9 +1,11 @@
 import youtubedl from 'youtube-dl-exec';
 import path from 'path';
 import { DownloaderHelper } from 'node-downloader-helper';
+import fs from 'fs';
 
 import * as state from '../state';
 import { Content } from '../types/content';
+import { createFolder } from '../utils/createFolder';
 
 const rootPath = path.resolve(__dirname, '../../');
 
@@ -11,7 +13,7 @@ export async function youtubeDownloader() {
   const content = state.load();
 
   await fetchVideoData(content);
-  await downloadSelectedVideo(content.generatedDownloadUrl);
+  await downloadSelectedVideo(content.generatedDownloadUrl, content.originTitleSanityzed);
 
   state.save(content)
 
@@ -26,11 +28,11 @@ export async function youtubeDownloader() {
       referer: content.youtubeVideoUrl,
     });
 
-    content.originTitle = videoData.title;
+    content.originTitleSanityzed = videoData.title.replace(/\ /g, '-').replace(/\|/g, '_').replace(/\./, '');
     content.originDescription = videoData.description;
     content.originVideoDuration = videoData.duration;
     content.tags = videoData.tags;
-    await downloadOriginThumbnail(content, videoData.thumbnail);
+    await downloadOriginThumbnail(content, videoData.thumbnail, content.originTitleSanityzed);
     selectBestQualityVideo(content);
 
     function selectBestQualityVideo(content: Content) {
@@ -54,9 +56,11 @@ export async function youtubeDownloader() {
       content.generatedDownloadUrl = urlVideo;
     }
 
-    async function downloadOriginThumbnail(content: Content, thumbnailUrl: string) {
+    async function downloadOriginThumbnail(content: Content, thumbnailUrl: string, title: string) {
       try {
-        const downloader = new DownloaderHelper(thumbnailUrl, `${rootPath}/sourceContent/`, {
+        await createFolder(`${rootPath}/sourceContent/renderedContent/processingVideo/assets`)
+
+        const downloader = new DownloaderHelper(thumbnailUrl, `${rootPath}/sourceContent/renderedContent/processingVideo/assets/`, {
           fileName: 'originThumbnail.jpg',
           override: true,
         });
@@ -72,8 +76,10 @@ export async function youtubeDownloader() {
     }
   }
 
-  async function downloadSelectedVideo(videoUrl: string) {
-    const downloader = new DownloaderHelper(videoUrl, `${rootPath}/sourceContent/`, {
+  async function downloadSelectedVideo(videoUrl: string, title: string) {
+    await createFolder(`${rootPath}/sourceContent/renderedContent/processingVideo/assets`)
+
+    const downloader = new DownloaderHelper(videoUrl, `${rootPath}/sourceContent/renderedContent/processingVideo/assets/`, {
       fileName: 'sourceVideo.mp4',
       override: true,
     });
