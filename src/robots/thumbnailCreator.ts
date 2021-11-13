@@ -89,7 +89,7 @@ export async function thumbnailCreator() {
       //   afterTaskDetails = data;
       // }
 
-      cmd.run('start "" "C:\\projetos\\podcast-cuts-creator\\src\\scripts\\teste.vbs"');
+      cmd.run('cscript "C:\\projetos\\podcast-cuts-creator\\src\\scripts\\teste.vbs"');
     })
   }
 }

@@ -1,15 +1,11 @@
-' Create WScript Shell Object to access filesystem.
 Set WshShell = WScript.CreateObject("WScript.Shell")
 
-' Start / Run NOTEPAD.EXE
-WshShell.Run "C:\projetos\podcast-cuts-creator\sourceContent\templates\photoshop\logo.psd"
+WshShell.Run "C:\projetos\podcast-cuts-creator\sourceContent\templates\photoshop\thumbnail-template.psd", 3
 
 WScript.Sleep 3000
 
-' Select, or bring Focus to a window named `NOTEPAD`
 WshShell.AppActivate "Adobe Photoshop 2022"
 
-' Wait for 5 seconds
 WScript.Sleep 5000
 
 WshShell.SendKeys "{ENTER}"
@@ -34,12 +30,6 @@ WshShell.SendKeys "{DOWN}"
 WshShell.SendKeys "{DOWN}"
 WshShell.SendKeys "{ENTER}"
 WScript.Sleep 1000
-WshShell.SendKeys "{TAB}"
-WshShell.SendKeys "{TAB}"
-WshShell.SendKeys "{TAB}"
-WshShell.SendKeys "{TAB}"
-WshShell.SendKeys "{TAB}"
-WshShell.SendKeys "{ENTER}"
 WshShell.SendKeys "+{C}"
 WshShell.SendKeys "+{;}"
 WshShell.SendKeys "{\}"
@@ -114,17 +104,15 @@ WshShell.SendKeys "{i}"
 WshShell.SendKeys "{p}"
 WshShell.SendKeys "{t}"
 WshShell.SendKeys "{s}"
+WshShell.SendKeys "{\}"
+WshShell.SendKeys "{s}"
+WshShell.SendKeys "{c}"
+WshShell.SendKeys "{r}"
+WshShell.SendKeys "{i}"
+WshShell.SendKeys "{p}"
+WshShell.SendKeys "{t}"
+WshShell.SendKeys "{.}"
+WshShell.SendKeys "{j}"
+WshShell.SendKeys "{s}"
 WScript.Sleep 100
-WshShell.SendKeys "{ENTER}"
-WScript.Sleep 500
-WshShell.SendKeys "{TAB}"
-WScript.Sleep 500
-WshShell.SendKeys "{TAB}"
-WScript.Sleep 500
-WshShell.SendKeys "{TAB}"
-WScript.Sleep 500
-WshShell.SendKeys "{TAB}"
-WScript.Sleep 500
-WshShell.SendKeys "{DOWN}"
-WScript.Sleep 500
 WshShell.SendKeys "{ENTER}"
