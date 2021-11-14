@@ -1,4 +1,6 @@
-var quantity = 1;
+#include json2.js
+
+var quantity = 2;
 // var data = [
 //   {
 
@@ -7,19 +9,34 @@ var quantity = 1;
 
 for (var imageIndex = 1; imageIndex <= quantity; imageIndex++) {
   var frontImageLayer = app.activeDocument.artLayers.getByName('imagem-1-plano');
-  replaceSmartObjectImage(2, frontImageLayer);
+  replaceSmartObjectImage(imageIndex, frontImageLayer);
 
   var backgroundImageLayer = app.activeDocument.artLayers.getByName('imagem-bg');
-  replaceSmartObjectImage(2, backgroundImageLayer);
+  replaceSmartObjectImage(imageIndex, backgroundImageLayer);
 
   var clickbaitTextLayer = app.activeDocument.artLayers.getByName('texto-clickbait');
-  setNewText('O Cu do Matheus ta todo roxo?', clickbaitTextLayer)
+  setNewText('Pq eu não cocei o braço antes?!', clickbaitTextLayer)
+
+  var borderLayer = app.activeDocument.artLayers.getByName('borda');
+  changePathColor('c7851c', borderLayer)
+
+  var insideImageBorderLayer = app.activeDocument.artLayers.getByName('borda-lateral-imagem');
+  changePathColor('c7851c', insideImageBorderLayer)
+
+  saveJpeg('thumb-' + imageIndex);
+
+
 };
+
+app.activeDocument.save()
+$.sleep(2000)
+// var idquit = charIDToTypeID("quit");
+// executeAction(idquit, undefined, DialogModes.ALL);
 
 function replaceSmartObjectImage(imageIndex, layer) {
   selectLayer(layer.name);
 
-  var replacementFile = new File("C:/projetos/podcast-cuts-creator/sourceContent/renderedContent/processingVideo/assets/thumbImageSource-" + imageIndex + ".jpg");
+  var replacementFile = new File("C:/DevProjects/podcast-cuts-creator/sourceContent/renderedContent/processingVideo/assets/thumbImageSource-" + imageIndex + ".jpg");
   frontImageLayer = replaceContents(replacementFile);
 
   function replaceContents(newFile) {
@@ -39,6 +56,30 @@ function setNewText(text, layer) {
 
   layer.textItem.contents = text
 };
+
+function changePathColor(color, layer) {
+  selectLayer(layer.name);
+
+  var newColor = new SolidColor();
+  newColor.rgb.hexValue = color;
+
+  setColorOfFillLayer(newColor)
+
+  function setColorOfFillLayer(color) {
+    var desc = new ActionDescriptor();
+    var ref = new ActionReference();
+    ref.putEnumerated(stringIDToTypeID('contentLayer'), charIDToTypeID('Ordn'), charIDToTypeID('Trgt'));
+    desc.putReference(charIDToTypeID('null'), ref);
+    var fillDesc = new ActionDescriptor();
+    var colorDesc = new ActionDescriptor();
+    colorDesc.putDouble(charIDToTypeID('Rd  '), color.rgb.red);
+    colorDesc.putDouble(charIDToTypeID('Grn '), color.rgb.green);
+    colorDesc.putDouble(charIDToTypeID('Bl  '), color.rgb.blue);
+    fillDesc.putObject(charIDToTypeID('Clr '), charIDToTypeID('RGBC'), colorDesc);
+    desc.putObject(charIDToTypeID('T   '), stringIDToTypeID('solidColorLayer'), fillDesc);
+    executeAction(charIDToTypeID('setd'), desc, DialogModes.NO);
+  }
+}
 
 function selectLayer(id, add, viz) {
   try {
@@ -68,3 +109,15 @@ function selectLayer(id, add, viz) {
   }
   catch (e) { alert(e); return false; }
 };
+
+function saveJpeg(name) {
+  var document = app.activeDocument;
+  var file = new File(document.path.parent.parent + '/renderedContent/processingVideo/render/' + name + '.jpg');
+
+  var opts = new JPEGSaveOptions();
+  opts.quality = 10;
+
+  document.saveAs(file, opts, true);
+
+  $.sleep(2000);
+}
