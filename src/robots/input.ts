@@ -1,6 +1,8 @@
 import readline from 'readline-sync';
 import * as state from '../state';
 
+import defaultData from '../defaultConfigurationContent.json';
+
 import { Content } from "../types/content";
 
 export function inputRobot() {
@@ -22,7 +24,12 @@ export function inputRobot() {
   }
 
   function askAndReturnSourceChannel() {
-    const sourceChannels = ['Cortes do flow', 'Cortes do venus', 'Cortes do inteligencia'];
+    const optionsArray: string[] = []
+    defaultData.map(item => {
+      optionsArray.push(item.name);
+    })
+
+    const sourceChannels = optionsArray;
     const sourceChannelsIndex = readline.keyInSelect(sourceChannels, 'Source channel: ')
     const selectedSourceChannels = sourceChannels[sourceChannelsIndex];
 
