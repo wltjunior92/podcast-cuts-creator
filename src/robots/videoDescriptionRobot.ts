@@ -1,4 +1,5 @@
 import fs from 'fs';
+import youtubedl from 'youtube-dl-exec';
 
 import * as state from '../state';
 import { Content } from '../types/content';
@@ -22,7 +23,19 @@ export async function videoDescriptionRobot() {
 
     urlOrigin = urlList.length > 0 && urlList[0];
 
-    const generatedDescription = `Assista esse episódio completo!\n${urlOrigin}`;
+    const completeVideoData = await youtubedl(urlOrigin, {
+      dumpSingleJson: true,
+      noWarnings: true,
+      noCallHome: true,
+      noCheckCertificate: true,
+      preferFreeFormats: true,
+      youtubeSkipDashManifest: true,
+      referer: urlOrigin,
+    });
+
+    const completeVideoName = completeVideoData.title
+
+    const generatedDescription = `Assista esse episódio completo!\n${completeVideoName}\n${urlOrigin}`;
     content.generatedDescription = generatedDescription;
   }
 

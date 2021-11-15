@@ -12,4 +12,6 @@ export type Content = {
   originalContentLink?: string;
   editedDescription?: string;
   sourceChannel?: string;
+  extractedThumbnails?: string[];
+  clickbait?: string;
 }

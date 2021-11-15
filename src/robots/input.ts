@@ -12,6 +12,7 @@ export function inputRobot() {
   while (!confirmation) {
     content.sourceChannel = askAndReturnSourceChannel();
     content.logoSide = askAndReturnLogoSide();
+    content.clickbait = askAndReturnClickbait();
     confirmation = confirmInputData();
   }
   state.save(content);
@@ -39,5 +40,9 @@ export function inputRobot() {
   function confirmInputData() {
     const confirmation = readline.keyInYN('Confirm selections?');
     return confirmation;
+  }
+
+  function askAndReturnClickbait() {
+    return readline.question('Write the video clickbait: ')
   }
 }

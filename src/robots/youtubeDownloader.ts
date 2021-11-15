@@ -1,7 +1,6 @@
 import youtubedl from 'youtube-dl-exec';
 import path from 'path';
 import { DownloaderHelper } from 'node-downloader-helper';
-import fs from 'fs';
 
 import * as state from '../state';
 import { Content } from '../types/content';

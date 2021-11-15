@@ -8,34 +8,35 @@ import * as state from '../state';
 import { Content } from '../types/content';
 
 const sourcePath = path.resolve(__dirname, '../../sourceContent/renderedContent/processingVideo/assets/sourceVideo.mp4');
-const targetPath = path.resolve(__dirname, '../../sourceContent/renderedContent/processingVideo/assets/thumbImageSource');
+const targetPath = path.resolve(__dirname, '../../sourceContent/renderedContent/processingVideo/assets/');
 const inputFilePath = path.resolve(__dirname, '../../sourceContent');
 const outputFilePath = path.resolve(__dirname, '../../sourceContent/renderedContent');
 const photoshopScriptsPath = path.resolve(__dirname, '../../src/scripts');
 
 export async function thumbnailCreator() {
   const content = state.load();
-  const thumbnailQuantity = 2;
+  const thumbnailQuantity = 6;
 
-  // await extractThumb();
-  // await editAllThumbnail(content);
-  await testOpenPhotoshopAndEnterArchive();
+  // await extractThumb(content);
+  await openPhotoshopAndEnterArchive();
 
-  async function extractThumb() {
+  async function extractThumb(content: Content) {
     return new Promise<void>(async (resolve, reject) => {
       console.log('Extracting images thumbnail...');
 
       let seconds = 30
       for (let count = 1; count <= thumbnailQuantity; count++) {
+        const imageName = `thumbImageSource-${count}.jpg`
         await thumb({
           source: sourcePath,
-          target: `${targetPath}-${count}.jpg`,
+          target: `${targetPath}${imageName}`,
           width: 1920,
           height: 1080,
           seconds: seconds,
         })
 
-        seconds += 5;
+        seconds += 15;
+        content.extractedThumbnails.push(imageName)
         console.log(`Saved image [${count}]`);
       }
       console.log('Images extracted!');
@@ -45,53 +46,34 @@ export async function thumbnailCreator() {
     })
   }
 
-  async function editAllThumbnail(content: Content) {
-    for (let imageIndex = 1; imageIndex <= thumbnailQuantity; imageIndex++) {
-      await editThumbnail(`thumbImageSource-${imageIndex}.jpg`, content.editedTitle, imageIndex);
-    }
-  }
-
-  async function editThumbnail(imageName: string, channelTitle: string, imageIndex: number) {
+  async function openPhotoshopAndEnterArchive() {
     return new Promise<void>((resolve, reject) => {
-      const thumbnailName = `ShotCutsThumb-${channelTitle}-${imageIndex}.png`
-      const inputFile = `${inputFilePath}/${imageName}`
-      const outputFile = `${outputFilePath}/${thumbnailName}`;
-      const height = 1080;
+      console.log("Oppening photoshop robot...");
+      cmd.runSync(`cscript "${photoshopScriptsPath}\\openPhotoshopScript.vbs"`);
 
-      const args = [
-        inputFile,
-        '(', '-clone', '0', '-background', 'white', '-blur', '50x200', ')',
-        '(', '-clone', '0', '-background', 'white', '-roll', '-400-0', '-crop', `1000x${height}`, '-geometry', '+300-0', ')',
-        '-delete', '0',
-        '-delete', '2',
-        '-gravity', 'center',
-        '-compose', 'over',
-        '-composite',
-        outputFile
-      ]
+      let photoshopTaskDetails: string = '';
 
-      const composite = spawn('magick', args);
-      composite.on('close', () => {
-        console.log(`Create image - ${thumbnailName}`);
-        resolve();
-      })
-    })
-  }
+      const openPhotoshopLogData = setInterval(() => {
+        console.log("Oppening photoshop robot...");
+      }, 2000)
 
-  async function testOpenPhotoshopAndEnterArchive() {
-    return new Promise<void>((resolve, reject) => {
-      // console.log('Oppening photoshop');
-      // cmd.run('start "" "C:\\projetos\\podcast-cuts-creator\\sourceContent\\templates\\photoshop\\logo.psd"');
+      while (!photoshopTaskDetails.includes('Photoshop.exe')) {
+        const { data } = cmd.runSync(`tasklist /v /fi "IMAGENAME eq Photoshop.exe"`);
+        photoshopTaskDetails = data;
+      }
 
-      // let afterTaskDetails: string = '';
-      // while (!afterTaskDetails.includes('Adobe Photoshop 2022')) {
-      //   const { data } = cmd.runSync(`tasklist /v /fi "IMAGENAME eq Photoshop.exe"`);
-      //   afterTaskDetails = data;
-      // }
+      clearInterval(openPhotoshopLogData);
 
-      const { data } = cmd.runSync(`cscript "${photoshopScriptsPath}\\teste.vbs"`);
-      console.log(data);
+      const runningPhotoshopLogData = setInterval(() => {
+        console.log("Oppening photoshop robot...");
+      }, 2000)
 
+      while (photoshopTaskDetails.includes('Photoshop.exe')) {
+        const { data } = cmd.runSync(`tasklist /v /fi "IMAGENAME eq Photoshop.exe"`);
+        photoshopTaskDetails = data;
+      }
+
+      clearInterval(runningPhotoshopLogData);
     })
   }
 }
