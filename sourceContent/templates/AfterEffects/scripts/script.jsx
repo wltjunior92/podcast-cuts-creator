@@ -33,9 +33,9 @@ var logo = contentComp.layer(1);
 
 var usefulDuration = contentData.originVideoDuration - selectedUsefulDurationData.introDuration - selectedUsefulDurationData.endingDuration;
 if (contentData.logoSide === 'right') {
-  logo.property('position').setValue([1915, 10, 0])
+  logo.property('position').setValue([1917, 0, 0])
 } else {
-  logo.property('position').setValue([367, 10, 0])
+  logo.property('position').setValue([367, 0, 0])
 }
 
 contentComp.duration = usefulDuration;
@@ -88,4 +88,4 @@ app.project.save();
 
 $.sleep(3000)
 
-// app.quit();
+app.quit();

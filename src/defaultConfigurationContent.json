@@ -2,19 +2,19 @@
   {
     "name": "Cortes do flow",
     "introDuration": 0,
-    "endingDuration": 30,
+    "endingDuration": 33,
     "color": "b7b7b7"
   },
   {
     "name": "Cortes do venus",
     "introDuration": 0,
-    "endingDuration": 30,
+    "endingDuration": 33,
     "color": "c7851c"
   },
   {
     "name": "Cortes do inteligencia",
     "introDuration": 6,
-    "endingDuration": 19,
+    "endingDuration": 20,
     "color": "4ed3b2"
   },
   {
@@ -26,13 +26,13 @@
   {
     "name": "Cortes do ticaracaticast",
     "introDuration": 0,
-    "endingDuration": 32,
+    "endingDuration": 33,
     "color": "e014f2"
   },
   {
     "name": "Cortes podpah",
     "introDuration": 0,
-    "endingDuration": 12,
+    "endingDuration": 13,
     "color": "f9bf11"
   }
 ]

@@ -23,7 +23,7 @@ export async function videoEditor() {
 
       setTimeout(() => {
         resolve();
-      }, 3000)
+      }, 5000)
     })
   }
 
