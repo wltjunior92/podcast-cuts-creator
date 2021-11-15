@@ -3,17 +3,19 @@ import { videoEditor } from './robots/videoEditor';
 import { videoRenderer } from './robots/videoRenderer';
 import { youtubeDownloader } from './robots/youtubeDownloader';
 import { videoDescriptionRobot } from './robots/videoDescriptionRobot';
-import * as state from './state';
 import { thumbnailCreator } from './robots/thumbnailCreator';
+import { changeGeneratedContentFolderName } from './robots/changeGeneratedContentFolderName';
 
 async function start() {
-  // inputRobot();
-  // await youtubeDownloader();
-  // await state.saveAfterEffectsScript();
-  // await videoEditor();
-  // await videoRenderer();
-  // await videoDescriptionRobot();
+  inputRobot();
+  await youtubeDownloader();
+  await videoEditor();
+  await videoRenderer();
+  await videoDescriptionRobot();
   await thumbnailCreator();
+  await changeGeneratedContentFolderName();
+
+  console.log('Press CTRL + C ti finish 👍');
 };
 
 start();

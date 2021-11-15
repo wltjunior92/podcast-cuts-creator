@@ -44,8 +44,9 @@ for (var imageIndex = 1; imageIndex <= contentData.extractedThumbnails.length; i
 
 app.activeDocument.save()
 $.sleep(2000)
-// var idquit = charIDToTypeID("quit");
-// executeAction(idquit, undefined, DialogModes.ALL);
+
+var idquit = charIDToTypeID("quit");
+executeAction(idquit, undefined, DialogModes.ALL);
 
 function replaceSmartObjectImage(imageIndex, layer) {
   selectLayer(layer.name);

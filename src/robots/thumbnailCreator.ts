@@ -8,25 +8,28 @@ import * as state from '../state';
 import { Content } from '../types/content';
 
 const sourcePath = path.resolve(__dirname, '../../sourceContent/renderedContent/processingVideo/assets/sourceVideo.mp4');
-const targetPath = path.resolve(__dirname, '../../sourceContent/renderedContent/processingVideo/assets/');
-const inputFilePath = path.resolve(__dirname, '../../sourceContent');
-const outputFilePath = path.resolve(__dirname, '../../sourceContent/renderedContent');
+const targetPath = path.resolve(__dirname, '../../sourceContent/renderedContent/processingVideo/assets');
 const photoshopScriptsPath = path.resolve(__dirname, '../../src/scripts');
 
 export async function thumbnailCreator() {
   const content = state.load();
   const thumbnailQuantity = 6;
 
-  // await extractThumb(content);
+  await extractThumb(content);
+  state.save(content);
+
   await openPhotoshopAndEnterArchive();
+  await toMonitorPhotoshop();
+
 
   async function extractThumb(content: Content) {
     return new Promise<void>(async (resolve, reject) => {
       console.log('Extracting images thumbnail...');
+      content.extractedThumbnails = [] as string[];
 
       let seconds = 30
       for (let count = 1; count <= thumbnailQuantity; count++) {
-        const imageName = `thumbImageSource-${count}.jpg`
+        const imageName = `\\thumbImageSource-${count}.jpg`
         await thumb({
           source: sourcePath,
           target: `${targetPath}${imageName}`,
@@ -48,32 +51,31 @@ export async function thumbnailCreator() {
 
   async function openPhotoshopAndEnterArchive() {
     return new Promise<void>((resolve, reject) => {
-      console.log("Oppening photoshop robot...");
+      console.log("Running photoshop robot...");
       cmd.runSync(`cscript "${photoshopScriptsPath}\\openPhotoshopScript.vbs"`);
+      resolve()
+    })
+  }
 
+  async function toMonitorPhotoshop() {
+    return new Promise<void>((resolve, reject) => {
       let photoshopTaskDetails: string = '';
-
-      const openPhotoshopLogData = setInterval(() => {
-        console.log("Oppening photoshop robot...");
-      }, 2000)
 
       while (!photoshopTaskDetails.includes('Photoshop.exe')) {
         const { data } = cmd.runSync(`tasklist /v /fi "IMAGENAME eq Photoshop.exe"`);
         photoshopTaskDetails = data;
       }
 
-      clearInterval(openPhotoshopLogData);
-
-      const runningPhotoshopLogData = setInterval(() => {
-        console.log("Oppening photoshop robot...");
-      }, 2000)
-
       while (photoshopTaskDetails.includes('Photoshop.exe')) {
         const { data } = cmd.runSync(`tasklist /v /fi "IMAGENAME eq Photoshop.exe"`);
         photoshopTaskDetails = data;
       }
 
-      clearInterval(runningPhotoshopLogData);
+      setTimeout(() => {
+        console.log('Photoshop robot finished!');
+
+        resolve()
+      }, 2000)
     })
   }
 }
