@@ -8,14 +8,14 @@ import { changeGeneratedContentFolderName } from './robots/changeGeneratedConten
 
 async function start() {
   inputRobot();
-  await youtubeDownloader();
-  await videoEditor();
-  await videoRenderer();
-  await videoDescriptionRobot();
-  await thumbnailCreator();
-  await changeGeneratedContentFolderName();
+  // await youtubeDownloader();
+  // await videoEditor();
+  // await videoRenderer();
+  // await videoDescriptionRobot();
+  // await thumbnailCreator();
+  // await changeGeneratedContentFolderName();
 
-  console.log('Press CTRL + C ti finish 👍');
+  // console.log('Press CTRL + C ti finish 👍');
 };
 
 start();

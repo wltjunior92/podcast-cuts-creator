@@ -1,4 +1,5 @@
 import readline from 'readline-sync';
+import query from 'synchronous-user-input';
 import * as state from '../state';
 
 import defaultData from '../defaultConfigurationContent.json';
@@ -50,6 +51,6 @@ export function inputRobot() {
   }
 
   function askAndReturnClickbait() {
-    return readline.question('Write the video clickbait: ')
+    return query('Write the video clickbait: ')
   }
 }

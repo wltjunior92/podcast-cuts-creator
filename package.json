@@ -24,6 +24,7 @@
     "node-downloader-helper": "^1.0.19",
     "node-video-thumb": "^1.0.11",
     "readline-sync": "^1.4.10",
+    "synchronous-user-input": "^0.0.4",
     "youtube-dl-exec": "^1.3.2"
   }
 }
