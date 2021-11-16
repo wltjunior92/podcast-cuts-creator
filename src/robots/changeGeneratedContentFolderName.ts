@@ -22,7 +22,7 @@ export async function changeGeneratedContentFolderName() {
         else console.log(`Folder renamed - ${newFolderName}`)
       })
 
-      while (!fs.existsSync(newFolderName)) { }
+      // while (!fs.existsSync(newFolderName)) { }
 
       resolve();
     })

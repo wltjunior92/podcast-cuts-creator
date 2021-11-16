@@ -26,7 +26,7 @@ export async function videoDescriptionRobot() {
     const completeVideoData = await youtubedl(urlOrigin, {
       dumpSingleJson: true,
       noWarnings: true,
-      noCallHome: true,
+      // noCallHome: true,
       noCheckCertificate: true,
       preferFreeFormats: true,
       youtubeSkipDashManifest: true,
@@ -47,6 +47,6 @@ export async function videoDescriptionRobot() {
     });
     const descriptionTxtString = `${content.generatedDescription}\n\n---------------\n\n${stringTags}`;
 
-    fs.writeFileSync('./sourceContent/renderedContent/processingVideo/descriptionText.txt', descriptionTxtString, 'utf-8');
+    fs.writeFileSync(`./sourceContent/renderedContent/processingVideo/descriptionText.txt`, descriptionTxtString, 'utf-8');
   }
 }

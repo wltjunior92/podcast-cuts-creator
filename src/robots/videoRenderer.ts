@@ -18,12 +18,15 @@ export async function videoRenderer() {
   await renderVideo(content);
   await closeAfterEffects();
 
+  state.save(content);
+
   async function renderVideo(content: Content) {
     return new Promise<void>(async (resolve, reject) => {
       await createFolder(`${rootDir}/sourceContent/renderedContent/processingVideo/render`)
 
+      const videoName = `ShortCuts-${content.originTitleSanityzed}`
       const templateFilePath = `${rootDir}/sourceContent/templates/AfterEffects/1/template.aep`;
-      const destinationFilePath = `${rootDir}/sourceContent/renderedContent/processingVideo/render/ShortCuts-${content.originTitleSanityzed}.mov`;
+      const destinationFilePath = `${rootDir}/sourceContent/renderedContent/processingVideo/render/${videoName}.mov`;
 
       console.log('Rendering vídeo:');
 
@@ -38,6 +41,7 @@ export async function videoRenderer() {
       });
 
       aerender.on('close', () => {
+        content.originTitleSanityzed = videoName;
         console.log('Renderer closed!');
         resolve();
       })

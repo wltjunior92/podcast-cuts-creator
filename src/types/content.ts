@@ -14,4 +14,5 @@ export type Content = {
   sourceChannel?: string;
   extractedThumbnails?: string[];
   clickbait?: string;
+  editedVideoName?: string;
 }

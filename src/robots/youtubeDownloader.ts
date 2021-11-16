@@ -20,14 +20,21 @@ export async function youtubeDownloader() {
     const videoData = await youtubedl(content.youtubeVideoUrl, {
       dumpSingleJson: true,
       noWarnings: true,
-      noCallHome: true,
+      // noCallHome: true,
       noCheckCertificate: true,
       preferFreeFormats: true,
       youtubeSkipDashManifest: true,
       referer: content.youtubeVideoUrl,
     });
 
-    content.originTitleSanityzed = videoData.title.replace(/\ /g, '-').replace(/\|/g, '_').replace(/\./, '');
+    content.originTitleSanityzed = videoData.title
+      .replace(/\ /g, '-')
+      .replace(/\|/g, '_')
+      .replace(/\./, '')
+      .replace(/\?/, '')
+      .replace(/\!/, '')
+      .replace(/\#/, '')
+      .replace(/\*/, '')
     content.originDescription = videoData.description;
     content.originVideoDuration = videoData.duration;
     content.tags = videoData.tags;
@@ -62,6 +69,7 @@ export async function youtubeDownloader() {
         const downloader = new DownloaderHelper(thumbnailUrl, `${rootPath}/sourceContent/renderedContent/processingVideo/assets/`, {
           fileName: 'originThumbnail.jpg',
           override: true,
+          retry: true,
         });
 
         downloader.on('start', () => console.log(`Starting download origin thumbnail: ${thumbnailUrl}`));
@@ -81,6 +89,7 @@ export async function youtubeDownloader() {
     const downloader = new DownloaderHelper(videoUrl, `${rootPath}/sourceContent/renderedContent/processingVideo/assets/`, {
       fileName: 'sourceVideo.mp4',
       override: true,
+      retry: true,
     });
 
     downloader.on('start', () => console.log(`Starting download: ${videoUrl}`));
