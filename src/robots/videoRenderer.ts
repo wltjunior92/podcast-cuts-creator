@@ -26,7 +26,7 @@ export async function videoRenderer() {
 
       const videoName = `ShortCuts-${content.originTitleSanityzed}`
       const templateFilePath = `${rootDir}/sourceContent/templates/AfterEffects/1/template.aep`;
-      const destinationFilePath = `${rootDir}/sourceContent/renderedContent/processingVideo/render/${videoName}.mov`;
+      const destinationFilePath = `${rootDir}/sourceContent/renderedContent/processingVideo/render/${videoName}.mp4`;
 
       console.log('Rendering vídeo:');
 
