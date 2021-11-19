@@ -11,10 +11,15 @@ export async function videoDescriptionRobot() {
   await saveTxtContent(content);
 
   async function generateDescription(content: Content) {
+    let stringArray: string[] = [];
     const originDescriptionLines = content.originDescription.split('\n');
+    originDescriptionLines.map(line => {
+      const lineItems = line.split(' ');
+      stringArray = [...stringArray, ...lineItems]
+    })
 
     let urlOrigin: string = ''
-    const urlList = originDescriptionLines.filter(line => {
+    const urlList = stringArray.filter(line => {
       if (line.match(/(https\:\/\/www\.youtube\.com\/watch+\?[a-zA-Z0-9._-])/gi) ||
         line.match(/(https\:\/\/youtu\.be\/[a-zA-Z0-9._-])/gi)) {
         return line;
