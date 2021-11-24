@@ -11,7 +11,6 @@ export async function changeGeneratedContentFolderName() {
 
   await changeName(content);
 
-
   async function changeName(content: Content) {
     return new Promise<void>((resolve, reject) => {
       const oldFolderName = `${folderPath}\\processingVideo`;

@@ -32,7 +32,7 @@ var sourceVideo = contentComp.layer(2);
 var logo = contentComp.layer(1);
 
 var usefulDuration = contentData.originVideoDuration - selectedUsefulDurationData.introDuration - selectedUsefulDurationData.endingDuration;
-if (contentData.logoSide === 'right') {
+if (defaultData.logoSide === 'right') {
   logo.property('position').setValue([1917, 0, 0])
 } else {
   logo.property('position').setValue([367, 0, 0])

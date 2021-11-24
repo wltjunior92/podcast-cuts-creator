@@ -1,13 +1,11 @@
 import path from 'path';
 import cmd from 'node-cmd';
-import { spawn } from 'child_process';
 import thumb from 'node-video-thumb';
 
 import * as state from '../state';
 
 import { Content } from '../types/content';
 
-const sourcePath = path.resolve(__dirname, '../../sourceContent/renderedContent/processingVideo/assets/sourceVideo.mp4');
 const targetPath = path.resolve(__dirname, '../../sourceContent/renderedContent/processingVideo/assets');
 const photoshopScriptsPath = path.resolve(__dirname, '../../src/scripts');
 
@@ -21,17 +19,16 @@ export async function thumbnailCreator() {
   await openPhotoshopAndEnterArchive();
   await toMonitorPhotoshop();
 
-
   async function extractThumb(content: Content) {
     return new Promise<void>(async (resolve, reject) => {
       console.log('Extracting images thumbnail...');
       content.extractedThumbnails = [] as string[];
 
-      let seconds = 30
+      let seconds = 15
       for (let count = 1; count <= thumbnailQuantity; count++) {
         const imageName = `\\thumbImageSource-${count}.jpg`
         await thumb({
-          source: sourcePath,
+          source: `${targetPath}\\sourceVideo.mp4`,
           target: `${targetPath}${imageName}`,
           width: 1920,
           height: 1080,

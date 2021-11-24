@@ -1,4 +1,4 @@
-import youtubedl from 'youtube-dl-exec';
+import youtubedl, { YtResponse } from 'youtube-dl-exec';
 import path from 'path';
 import { DownloaderHelper } from 'node-downloader-helper';
 
@@ -27,14 +27,16 @@ export async function youtubeDownloader() {
       referer: content.youtubeVideoUrl,
     });
 
+    setSourceChannel(videoData.channel, content);
+
     content.originTitleSanityzed = videoData.title
       .replace(/\ /g, '-')
-      .replace(/\|/g, '_')
-      .replace(/\./, '')
-      .replace(/\?/, '')
-      .replace(/\!/, '')
-      .replace(/\#/, '')
-      .replace(/\*/, '')
+      .replace(/\|/g, '')
+      .replace(/\./g, '')
+      .replace(/\?/g, '')
+      .replace(/\!/g, '')
+      .replace(/\#/g, '')
+      .replace(/\*/g, '')
     content.originDescription = videoData.description;
     content.originVideoDuration = videoData.duration;
     content.tags = videoData.tags;
@@ -79,6 +81,31 @@ export async function youtubeDownloader() {
         content.originThumbnail = thumbnailUrl;
       } catch (error) {
         console.log(`Thumbnail download failed: ${error.message}`);
+      }
+    }
+
+    function setSourceChannel(channel: string, content: Content) {
+      switch (channel) {
+        case ('Cortes do Flow [OFICIAL]'):
+          content.sourceChannel = 'Cortes do flow'
+          break;
+        case ('Cortes do Venus [OFICIAL]'):
+          content.sourceChannel = 'Cortes do venus'
+          break;
+        case ('Cortes do Inteligência [OFICIAL]'):
+          content.sourceChannel = 'Cortes do inteligencia'
+          break;
+        case ('Cortes do Ciência Sem Fim [OFICIAL]'):
+          content.sourceChannel = 'Cortes do ciencia'
+          break;
+        case ('TICARACATICAST Cortes[OFICIAL]'):
+          content.sourceChannel = 'Cortes do ticaracaticast'
+          break;
+        case ('Cortes Podpah [OFICIAL]'):
+          content.sourceChannel = 'Cortes podpah'
+          break;
+        default:
+          break;
       }
     }
   }

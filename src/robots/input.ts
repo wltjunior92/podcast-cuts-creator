@@ -11,10 +11,8 @@ export function inputRobot() {
 
   let confirmation;
 
-  content.youtubeVideoUrl = askAndReturnyoutubeVideoUrl();
   while (!confirmation) {
-    content.sourceChannel = askAndReturnSourceChannel();
-    content.logoSide = askAndReturnLogoSide();
+    content.youtubeVideoUrl = askAndReturnyoutubeVideoUrl();
     content.clickbait = askAndReturnClickbait();
     confirmation = confirmInputData();
   }
@@ -22,27 +20,6 @@ export function inputRobot() {
 
   function askAndReturnyoutubeVideoUrl() {
     return readline.question('Paste an youtube podcast cut url: ')
-  }
-
-  function askAndReturnSourceChannel() {
-    const optionsArray: string[] = []
-    defaultData.map(item => {
-      optionsArray.push(item.name);
-    })
-
-    const sourceChannels = optionsArray;
-    const sourceChannelsIndex = readline.keyInSelect(sourceChannels, 'Source channel: ')
-    const selectedSourceChannels = sourceChannels[sourceChannelsIndex];
-
-    return selectedSourceChannels;
-  }
-
-  function askAndReturnLogoSide() {
-    const logoSides = ['right', 'left'];
-    const logoSideIndex = readline.keyInSelect(logoSides, 'Where is the logo? ')
-    const selectedLogoSide = logoSides[logoSideIndex];
-
-    return selectedLogoSide;
   }
 
   function confirmInputData() {

@@ -14,8 +14,6 @@ async function start() {
   await videoDescriptionRobot();
   await thumbnailCreator();
   await changeGeneratedContentFolderName();
-
-  console.log('Press CTRL + C ti finish 👍');
 };
 
 start();

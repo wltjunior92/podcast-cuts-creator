@@ -36,6 +36,4 @@ export async function videoEditor() {
       }, 3000)
     })
   }
-
-
 }
