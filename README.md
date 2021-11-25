@@ -13,7 +13,15 @@
     <a href="https://github.com/filipedeschamps/video-maker">Filipe Deschamps Video maker</a><br />
     robot!
   </p>
+  
 </div>
+<br />
+<p align="left">
+  Youtube channel with videos generated with this project<br />
+  <a href="https://www.youtube.com/channel/UCo6kLVgGrTFLIXYGgKsoo_w">Short Cuts - Podcast</a>
+</p>
+<br />
+<br />
 
 <details>
   <summary>Table of Contents</summary>
@@ -116,6 +124,6 @@ PS.: During this process you need to avoid clicking or swiching the window.
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
