@@ -102,6 +102,8 @@ You will probably need to add the path to your AfterEffects Suport Files folder 
 
 <img src="images/enviroment-variables-example.jpg" alt="Enviroment Variable path example" width="533" height="79">
 
+<strong>You will probabli need to install the [Voukoder](https://www.voukoder.org/forum/thread/783-downloads-instructions/) to make AfterEffects robot editor works correctly, so it can render an mp4 output directly from the AfterEffects render queue.</strong>
+
 After this, you will need to run the command `start` on your project to begin the process.
 
 And now you just need to paste an youtube url from a podcast cut channel, write the click bait text that goes on the thumbnail, confirm and let the "magic" happen 🤷‍♂️.
