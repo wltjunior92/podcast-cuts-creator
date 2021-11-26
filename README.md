@@ -110,7 +110,7 @@ And now you just need to paste an youtube url from a podcast cut channel, write 
 
 ### Important
 
-I didn't find a wai to run Photoshop tha same way as AfterEfects, from the command line, so , when the step that uses photoshop begin, if the Photoshop window doesn't come to the foreground wou will have to do it by hand wait some seconds to let the vbs script navigate to the menu item that will run the photoshop script.
+I didn't find a way to run Photoshop tha same way as AfterEfects, from the command line, so , when the step that uses photoshop begin, if the Photoshop window doesn't come to the foreground wou will have to do it by hand wait some seconds to let the vbs script navigate to the menu item that will run the photoshop script.
 
 PS.: During this process you need to avoid clicking or swiching the window.
 
