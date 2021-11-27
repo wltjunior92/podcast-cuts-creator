@@ -47,9 +47,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project was build when I realize that there is a very common patten on the kind of videos on youtube podcast cuts channel.
+This project was build when I realize that there is a very common pattern on the kind of videos on youtube podcast cuts channel.
 
-It is aways some kind of intro and an ending showing some kind of sponsor of the channel, etc.
+It's aways some kind of intro and an ending showing some kind of sponsor of the channel, etc.
 
 So how could I automate all this editing process?
 
@@ -110,14 +110,14 @@ And now you just need to paste an youtube url from a podcast cut channel, write 
 
 ### Important
 
-I didn't find a way to run Photoshop tha same way as AfterEfects, from the command line, so , when the step that uses photoshop begin, if the Photoshop window doesn't come to the foreground wou will have to do it by hand wait some seconds to let the vbs script navigate to the menu item that will run the photoshop script.
+I didn't figure out how to run Photoshop the same way as AfterEfects, from the command line, so , when the step that uses photoshop begin, if the Photoshop window doesn't come to the foreground you will have to do it by hand wait some seconds to let the vbs script navigate to the menu item that will run the photoshop script.
 
 PS.: During this process you need to avoid clicking or swiching the window.
 
 
 ## Possible improvements and bug corrections
 
-- [ ] Autoamte youtube upload vídeo and thumbnail (it was made on the [Video Maker](https://github.com/filipedeschamps/video-maker))
+- [ ] Automatic Youtube upload video and thumbnail (it was made on the [Video Maker](https://github.com/filipedeschamps/video-maker))
 - [ ] Add the possibility to insert an array of youtube url to make more than one video per command
 
 <p align="right">(<a href="#top">back to top</a>)</p>
